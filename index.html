@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Drone & Robotics Club</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Framer Motion (for animations) -->
+  <script src="https://unpkg.com/framer-motion@10.12.16/dist/framer-motion.umd.js"></script>
+
+  <style>
+    body {
+      background: #f3f4f6;
+      font-family: Arial, sans-serif;
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+<!-- Add this in your <head> section to import Poppins font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<!-- Header starts here -->
+<header id="header" class="flex items-center justify-between bg-[#eaf2fb] p-4 shadow-sm" style="font-family: 'Poppins', sans-serif;">
+  <!-- Left Section: Logo + Name -->
+  <div class="flex items-center">
+    <div class="bg-white rounded-full border border-[#3763ab] p-2">
+      <img src="logo.png" alt="BPUT Logo" class="h-20 w-20" />
+    </div>
+    <div class="ml-4">
+      <div class="flex items-center">
+        <span class="text-xl font-bold text-[#3763ab]">Biju Patnaik University of Technology, Odisha</span>
+      </div>
+      <div>
+        <span class="text-lg font-semibold text-[#3763ab]">ବିଜୁ ପଟ୍ଟନାୟକ ବୈଷୟିକ ବିଶ୍ଵବିଦ୍ୟାଳୟ, ଓଡ଼ିଶା</span>
+      </div>
+    </div>
+  </div>
+  <!-- Right Section: CUPGS -->
+<div class="flex flex-col items-center">
+  <span class="text-lg font-bold text-[#3763ab] mb-1">Centre for UG & PG Studies (CUPGS)</span>
+  <span class="text-base font-medium text-[#3763ab]">(In-Campus College of the University)</span>
+</div>
+</header>
+
+
+ <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+ <nav id="navbar" class="bg-blue-700 text-white flex justify-center shadow opacity-0 -translate-y-10 transition-all duration-700 delay-300" style="font-family: 'Poppins', sans-serif;">
+  <a href="#" class="px-5 py-3 font-semibold hover:bg-blue-800">Home</a>
+  <a href="#" class="px-5 py-3 font-semibold hover:bg-blue-800">About Us</a>
+  <a href="#" class="px-5 py-3 font-semibold hover:bg-blue-800">Notices</a>
+  <a href="#" class="px-5 py-3 font-semibold hover:bg-blue-800">CUPGS</a>
+  <a href="#" class="px-5 py-3 font-semibold hover:bg-blue-800">FAQ’s</a>
+  <a href="#" class="px-5 py-3 font-semibold hover:bg-blue-800">Contacts</a>
+</nav>
+
+
+<style>
+  /* Hide scrollbar */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Auto horizontal scrolling animation */
+  @keyframes scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .scrolling-wrapper {
+    display: flex;
+    gap: 1.5rem;
+    animation: scroll-left 30s linear infinite;
+  }
+
+  /* Modal styles for enlarged image */
+  .modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.5);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 50;
+  }
+  .modal-img {
+    max-width: 80vw;
+    max-height: 80vh;
+    border-radius: 1.25rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    transition: transform 0.3s;
+    transform: scale(1.12);
+    background: #fff;
+  }
+</style>
+
+<section class="w-full overflow-hidden py-8">
+  <div class="no-scrollbar scrolling-wrapper" id="gallery">
+    <!-- 11 images (duplicates for seamless loop) -->
+    <img src="image1.jpg" alt="Image 1" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
+    <img src="image2.jpg" alt="Image 2" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
+    <img src="image3.jpg" alt="Image 3" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
+    <img src="image4.jpg" alt="Image 4" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
+    <img src="image5.jpg" alt="Image 5" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
+    <img src="image6.jpg" alt="Image 6" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
+    <img src="image7.jpg" alt="Image 7" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
+    <img src="image8.jpg" alt="Image 8" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
+    <img src="image9.jpg" alt="Image 9" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
+    <img src="image10.jpg" alt="Image 10" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
+    <img src="image11.jpg" alt="Image 11" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
+    <!-- Repeat images for seamless scroll -->
+    <img src="image1.jpg" alt="Image 1" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
+    <img src="image2.jpg" alt="Image 2" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
+    <img src="image3.jpg" alt="Image 3" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
+    <img src="image4.jpg" alt="Image 4" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
+    <img src="image5.jpg" alt="Image 5" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
+    <img src="image6.jpg" alt="Image 6" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
+    <img src="image7.jpg" alt="Image 7" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
+    <img src="image8.jpg" alt="Image 8" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
+    <img src="image9.jpg" alt="Image 9" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
+    <img src="image10.jpg" alt="Image 10" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
+    <img src="image11.jpg" alt="Image 11" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
+  </div>
+</section>
+
+<!-- Modal for Enlarged Image -->
+<div id="img-modal" style="display:none;">
+  <div class="modal-overlay" id="modal-overlay">
+    <img id="modal-img" src="" alt="Enlarged Image" class="modal-img"/>
+  </div>
+</div>
+
+<script>
+  // Modal enlarge logic
+  const modal = document.getElementById('img-modal');
+  const modalImg = document.getElementById('modal-img');
+  const overlay = document.getElementById('modal-overlay');
+  document.querySelectorAll('.gallery-img').forEach(img => {
+    img.addEventListener('click', function() {
+      modal.style.display = 'block';
+      modalImg.src = this.src;
+      modalImg.alt = this.alt;
+    })
+  });
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) { modal.style.display = 'none'; }
+  });
+  window.addEventListener('keydown', function(e) {
+    if (e.key==='Escape') { modal.style.display = 'none'; }
+  });
+</script>
+
+
+
+
+ <!-- Hero Section -->
+<section id="hero" class="bg-blue-100 text-center py-16 opacity-0 scale-90 transition-all duration-800 delay-500">
+  <h2 class="text-4xl font-bold mb-2" style="font-family: 'Poppins', sans-serif;">
+  Welcome to Robotics Club
+</h2>
+
+  <div class="text-center">
+<br>
+  <p class="text-2xl font-medium leading-relaxed max-w-3xl mx-auto">
+    Join our community of innovators and problem-solvers as we explore the
+    exciting world of electronics and robotics through workshops and
+    competitions.
+  </p>
+</div>
+
+
+</section>
+
+
+  <!-- Main Content -->
+  <main class="flex flex-1 p-6 gap-6">
+    <!-- Notices -->
+    <section id="notices" class="flex-1 bg-white p-6 rounded-2xl shadow-lg opacity-0 -translate-x-20 transition-all duration-800 delay-600">
+      <h2 class="text-2xl font-bold text-blue-900 mb-4">Notices</h2>
+      <ul class="space-y-4">
+        <li class="border-b pb-2"><b>16 Aug 2025:</b> Workshop on Autonomous Drones scheduled on 25th August at Seminar Hall.</li>
+        <li class="border-b pb-2"><b>14 Aug 2025:</b> Registration open for National Robotics Competition 2025.</li>
+        <li class="border-b pb-2"><b>10 Aug 2025:</b> Results declared for Robotics Coding Hackathon.</li>
+        <li class="border-b pb-2"><b>05 Aug 2025:</b> Orientation Programme for new Robotics Club members on 20th August.</li>
+      </ul>
+    </section>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="w-72 space-y-4 opacity-0 translate-x-20 transition-all duration-800 delay-700">
+  <!-- Anthem Card -->
+  <div class="bg-white p-4 rounded-2xl shadow-md">
+    <h3 class="text-lg font-bold text-[#1a3688] mb-2">BPUT Anthem</h3>
+    <a href="https://drive.google.com/file/d/14QTDfvTJG3Lx8_ZePZfjboM7S9eqEC7R/view" class="flex items-center text-gray-800" target="_blank" rel="noopener noreferrer">
+      <span class="mr-2 text-xl">🎵</span>
+      <span>Listen to Anthem</span>
+    </a>
+  </div>
+  <!-- Student Services Card -->
+  <div class="bg-white p-4 rounded-2xl shadow-md">
+    <h3 class="text-lg font-bold text-[#1a3688] mb-2">Student Services</h3>
+    <ul class="list-disc list-inside text-gray-900 font-normal">
+      <li>Membership Portal</li>
+      <li>Project Submissions</li>
+    </ul>
+  </div>
+  <!-- E-Learning Resources Card -->
+  <div class="bg-white p-4 rounded-2xl shadow-md">
+    <h3 class="text-lg font-bold text-[#1a3688] mb-2">E-Learning Resources</h3>
+    <ul class="list-disc list-inside text-gray-900 font-normal">
+      <li>Robotics Tutorials</li>
+      <li>AI & ML in Robotics</li>
+    </ul>
+  </div>
+</aside>
+
+  </main>
+
+
+<!-- Profiles Grid Section (Perfect image centering) -->
+<section class="w-full py-8 bg-white flex justify-center">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center mx-auto">
+    <!-- Chancellor Card -->
+    <div class="flex flex-col items-center w-72">
+      <img src="profile1.jpg" alt="Chancellor" class="w-40 h-48 object-cover rounded-lg shadow-lg mb-3" />
+      <div class="bg-white bg-opacity-90 rounded-xl shadow-lg px-6 py-4 w-64 min-h-[170px] flex flex-col justify-center">
+        <div class="text-center text-2xl font-bold text-yellow-500 mb-2">Chancellor</div>
+        <div class="text-center leading-tight mb-1">
+          <span class="text-gray-800 font-semibold">Dr. Hari Babu Kambhampati</span><br>
+          <span class="text-gray-800 font-normal">Governor of Odisha</span>
+        </div>
+      </div>
+    </div>
+    <!-- Vice Chancellor Card -->
+    <div class="flex flex-col items-center w-72">
+      <img src="profile2.jpg" alt="Vice Chancellor" class="w-40 h-48 object-cover rounded-lg shadow-lg mb-3" />
+      <div class="bg-white bg-opacity-90 rounded-xl shadow-lg px-6 py-4 w-64 min-h-[170px] flex flex-col justify-center">
+        <div class="text-center text-2xl font-bold text-yellow-500 mb-2">Vice Chancellor</div>
+        <div class="text-center text-gray-800 font-semibold leading-tight mb-1">Prof. Amiya Kumar Rath</div>
+      </div>
+    </div>
+    <!-- Director Card -->
+    <div class="flex flex-col items-center w-72">
+      <img src="profile3.jpg" alt="Director" class="w-40 h-48 object-cover rounded-lg shadow-lg mb-3" />
+      <div class="bg-white bg-opacity-90 rounded-xl shadow-lg px-6 py-4 w-64 min-h-[170px] flex flex-col justify-center">
+        <div class="text-center text-2xl font-bold text-yellow-500 mb-2">DIC, CUPGS</div>
+        <div class="text-center text-gray-800 font-semibold leading-tight mb-1">Dr. Sivkumar Mishra</div>
+        <div class="text-center text-gray-700 text-sm mb-1">DIC, CUPGS, BPUT Odisha</div>
+      </div>
+    </div>
+    <!-- Assistant Professor Card -->
+    <div class="flex flex-col items-center w-72">
+      <img src="profile4.jpg" alt="Assistant Professor" class="w-40 h-48 object-cover rounded-lg shadow-lg mb-3" />
+      <div class="bg-white bg-opacity-90 rounded-xl shadow-lg px-6 py-4 w-64 min-h-[170px] flex flex-col justify-center">
+        <div class="text-center text-2xl font-bold text-yellow-500 mb-2">Assistant Professor</div>
+        <div class="text-center text-gray-800 font-semibold leading-tight mb-1">Dr. Saswata Satpathi</div>
+        <div class="text-center text-gray-700 text-sm mb-1">Department of Electrical Engineering, CUPGS, BPUT, Odisha</div>
+      </div>
+    </div>
+    <!-- Secretary -->
+    <div class="flex flex-col items-center w-72">
+      <img src="profile5.jpg" alt="Secretary" class="w-40 h-48 object-cover rounded-lg shadow-lg mb-3" />
+      <div class="bg-white bg-opacity-90 rounded-xl shadow-lg px-6 py-4 w-64 min-h-[170px] flex flex-col justify-center">
+        <div class="text-center text-2xl font-bold text-yellow-500 mb-2">Secretary</div>
+        <div class="text-center text-gray-800 font-semibold leading-tight mb-1">Biki Pradhan</div>
+        <div class="text-center text-gray-700 text-sm mb-1">Final year B.Tech Student</div>
+      </div>
+    </div>
+    <!-- Assistant Secretary -->
+    <div class="flex flex-col items-center w-72">
+      <img src="profile6.jpg" alt="Assistant Secretary" class="w-40 h-48 object-cover rounded-lg shadow-lg mb-3" />
+      <div class="bg-white bg-opacity-90 rounded-xl shadow-lg px-6 py-4 w-64 min-h-[170px] flex flex-col justify-center">
+        <div class="text-center text-2xl font-bold text-yellow-500 mb-2">Assistant Secretary</div>
+        <div class="text-center text-gray-800 font-semibold leading-tight mb-1">Swarnabh Swain</div>
+        <div class="text-center text-gray-700 text-sm mb-1">Final year B.Tech Student</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- University Contact and Location Section (with working social links) -->
+<section class="w-full bg-white py-6 px-0 border-t">
+  <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center w-full max-w-7xl mx-auto gap-8">
+    <!-- Left: University Info -->
+    <div class="flex-1 flex flex-col items-center lg:items-start px-4">
+      <img src="logo.png" alt="BPUT Logo" class="w-24 h-24 mb-4" />
+      <div class="text-2xl font-bold text-[#1467b8] text-center lg:text-left mb-2" style="font-family: 'Poppins',sans-serif;">
+        Biju Patnaik University of Technology (BPUT)
+      </div>
+      <div class="italic text-lg text-gray-700 text-center lg:text-left mb-3" style="font-family: 'Poppins',sans-serif;">
+        Chhend Colony, Rourkela, Odisha-769015
+      </div>
+      <div class="flex flex-col sm:flex-row sm:justify-start gap-8 mb-3">
+        <div class="text-base text-gray-900 font-semibold">Phone : <span class="font-bold">(0661) 2482556</span></div>
+        <div class="text-base text-gray-900 font-semibold">Fax : <span class="font-bold">(0661) 2482562</span></div>
+      </div>
+      <div class="text-[#f5b914] font-medium text-base mb-4 text-center lg:text-left">
+        For Examination related enquiry call on (0661)2482560
+      </div>
+      <!-- Social Icons with working links -->
+      <div class="flex gap-8 mt-2">
+        <a href="https://www.facebook.com/bputofficial" target="_blank" rel="noopener noreferrer" class="text-blue-700">
+          <i class="fab fa-facebook-f text-2xl"></i>
+        </a>
+        <a href="https://x.com/bputofficial" target="_blank" rel="noopener noreferrer" class="text-blue-700">
+          <i class="fab fa-twitter text-2xl"></i>
+        </a>
+        <a href="https://www.youtube.com/bputodisha" target="_blank" rel="noopener noreferrer" class="text-blue-700">
+          <i class="fab fa-youtube text-2xl"></i>
+        </a>
+        <a href="https://www.linkedin.com/school/biju-patnaik-university-of-technology-odisha/ " target="_blank" rel="noopener noreferrer" class="text-blue-700">
+          <i class="fab fa-linkedin-in text-2xl"></i>
+        </a>
+      </div>
+    </div>
+    <!-- Right: Location -->
+    <div class="flex-1 flex flex-col items-center px-4 w-full">
+      <div class="w-full flex flex-col items-center">
+        <div class="flex items-center mb-3 gap-2">
+          <span class="text-2xl font-bold text-[#1467b8]" style="font-family: 'Poppins',sans-serif;">Location</span>
+          <span class="text-yellow-500 text-2xl ml-1"><i class="fas fa-map-marked-alt"></i></span>
+        </div>
+        <div class="w-full bg-gray-200 rounded-xl overflow-hidden mb-4" style="max-width:420px;">
+          <!-- Static Google Map iframe -->
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3720.2377858672572!2d84.82279731541584!3d22.26111948534325!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e3f5b50f92dab87%3A0x23b8c73bb4ea5cca!2sBiju%20Patnaik%20University%20of%20Technology!5e0!3m2!1sen!2sin!4v1683200000000!5m2!1sen!2sin"
+            width="420" height="180" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+        <a
+          href="https://maps.app.goo.gl/scjxUMEfjSkouJYC7"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-blue-700 font-semibold underline text-base mt-2 mb-4"
+        >
+          View on Google Maps
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- Copyright & Maintainer Bar -->
+  <div class="w-full bg-[#fac801] text-black font-medium text-sm text-center px-3 py-2 mt-7 flex flex-col md:flex-row justify-between items-center" style="font-family:'Poppins',sans-serif;">
+    <div>
+      Copyright © 2025 Biju Patnaik University of Technology (BPUT), All Rights Reserved.
+    </div>
+    <div>
+      Developed and maintained by <span class="font-bold">All India Online PVT. LTD.</span>
+    </div>
+  </div>
+</section>
+<!-- Font Awesome CDN for social/location icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+
+  <!-- Animations -->
+  <script>
+    window.addEventListener("load", () => {
+      document.getElementById("header").classList.remove("opacity-0", "-translate-y-20");
+      document.getElementById("navbar").classList.remove("opacity-0", "-translate-y-10");
+      document.getElementById("hero").classList.remove("opacity-0", "scale-90");
+      document.getElementById("notices").classList.remove("opacity-0", "-translate-x-20");
+      document.getElementById("sidebar").classList.remove("opacity-0", "translate-x-20");
+      document.getElementById("footer").classList.remove("opacity-0");
+    });
+  </script>
+</body>
+</html>
