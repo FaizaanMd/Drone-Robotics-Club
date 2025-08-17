@@ -14,11 +14,11 @@
       background: #000000; /* True AMOLED black */
       color: #d1d5db; /* Tailwind gray-300 */
       font-family: 'Poppins', Arial, sans-serif;
-      background-image: url('bg-image.png');
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-attachment: fixed;
+      
+      
+      
+      
+      
     }
     /* Loader styles */
     #logo-loader {
@@ -100,33 +100,35 @@
       box-shadow: 0 2px 20px rgb(64 201 255 / 0.12);
     }
     nav a {
-      transition: box-shadow 0.25s cubic-bezier(0.4,0,0.2,1), color 0.2s, background 0.2s, transform 0.25s;
-      color: #d1d5db !important;
-      border-radius: 0.5rem;
-      padding: 0.75rem 1.5rem;
-      font-weight: 600;
-      position: relative;
-    }
-    nav a:hover {
-      box-shadow: 0 0 15px 2px rgb(100 213 246 / 0.6);
-      color: #64d5f6 !important;
-      background: rgba(100, 213, 246, 0.2) !important;
-      transform: scale(1.05) translateY(-3px);
-    }
-    nav a:after {
-      content: '';
-      position: absolute;
-      left: 16px;
-      right: 16px;
-      bottom: 6px;
-      height: 2px;
-      background: linear-gradient(90deg, #64d5f6, #d068f9 80%, rgba(255,255,255,0));
-      border-radius: 1px;
-      opacity: 0;
-      transition: opacity 0.25s;
-    }
-    nav a:hover:after {
-      opacity: 1;
+  position: relative;
+  color: #d1d5db !important;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #64d5f6 !important; /* subtle accent */
+}
+
+/* Underline animation */
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 60%;
+  height: 2px;
+  background-color: #64d5f6;
+  transition: transform 0.3s ease;
+  transform-origin: center;
+}
+
+nav a:hover::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
     }
     /* Headings and text colors */
     h1, h2, h3, h4, h5, h6, .font-bold {
@@ -137,35 +139,81 @@
       color: #64d5f6 !important;
     }
     /* Profile cards styling and animation */
-    .profile-card {
-      opacity: 0;
-      transform: translateY(35px) scale(0.95);
-      transition: opacity 0.9s cubic-bezier(0.4,0,0.2,1), transform 0.9s cubic-bezier(0.4,0,0.2,1);
-      background-color: #1a1a1f;
-      border-radius: 1rem;
-      box-shadow: 0 8px 30px rgb(0 0 0 / 0.6);
-      color: #d1d5db;
-    }
-    .profile-card.animated {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-    .profile-card img {
-      border-radius: 1rem;
-      box-shadow: 0 0 20px #64d5f699;
-      transition: box-shadow 0.3s, transform 0.3s;
-    }
-    .profile-card:hover img {
-      box-shadow: 0 0 40px #64d5f6cc;
-      transform: scale(1.1);
+    /* Profile card wrapper with gradient border */
+/* Subtle hover effect for profile cards */
+/* Profile card wrapper with gradient border */
+/* Profile card */
+.profile-card {
+  border-radius: 1rem;
+  background: #121212; /* clean dark bg */
+  border: 1px solid #2d2d2d; /* subtle default border */
+  width: 220px;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  padding: 1rem;
+}
+
+/* Hover effect - minimal */
+.profile-card:hover {
+  transform: translateY(-6px);
+  border-color: #64d5f6; /* subtle accent border */
+  box-shadow: 0 6px 20px rgba(100, 213, 246, 0.15); /* soft cyan glow */
+}
+
+/* Profile image circular */
+.profile-card img {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 0.75rem auto;
+  transition: transform 0.3s ease;
+}
+
+.profile-card:hover img {
+  transform: scale(1.03); /* small zoom */
+}
+
+/* Title (role like Chief Patron) */
+.profile-card .title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #64d5f6; /* accent cyan */
+  margin-bottom: 0.4rem;
+}
+
+/* Name */
+.profile-card .name {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #d1d5db; /* subtle gray */
+}
+
+
     }
     /* Notices and sidebar text colors */
     #notices ul li, #sidebar ul li {
       color: #cbd5e1;
     }
-  </style>
+  
+#bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  filter: brightness(0.7);
+}
+
+</style>
 </head>
 <body class="flex flex-col min-h-screen">
+  <!-- Background Video -->
+  <video autoplay muted loop playsinline id="bg-video">
+    <source src="your-video.mp4" type="video/mp4">
+  </video>
   <!-- Loader with animated logo and club name below -->
   <div id="logo-loader">
     <img src="drone-robotics-logo.png" alt="Drone & Robotics Club Logo Loader" class="animate-spin-slow h-44 w-44 rounded-full shadow-xl mb-8" />
@@ -174,26 +222,39 @@
     </span>
   </div>
 
-  <!-- Header -->
-  <header id="header" class="flex items-center justify-between p-4 shadow-sm opacity-0 -translate-y-20 transition-all duration-700">
-    <div class="flex items-center">
-      <div class="bg-[#1a1a1f] rounded-full border border-gray-700 p-2">
-        <img src="logo.png" alt="BPUT Logo" class="h-20 w-20 rounded-full" />
-      </div>
-      <div class="ml-4">
-        <div class="flex items-center">
-          <span class="text-xl font-bold">Biju Patnaik University of Technology, Odisha</span>
-        </div>
-        <div>
-          <span class="text-lg font-semibold">ବିଜୁ ପଟ୍ଟନାୟକ ବୈଷୟିକ ବିଶ୍ଵବିଦ୍ୟାଳୟ, ଓଡ଼ିଶା</span>
-        </div>
-      </div>
+ <header id="header" class="flex items-center justify-between p-4 shadow-sm opacity-0 -translate-y-20 transition-all duration-700">
+  <!-- Left side: Logos + University name -->
+  <div class="flex items-center space-x-4">
+    
+    <!-- New Logo (Drone & Robotics Club) -->
+    <div class="bg-[#1a1a1f] rounded-full border border-gray-700 p-2 flex items-center justify-center">
+      <img src="drone-robotics-logo (2).png" alt="Drone & Robotics Club Logo" class="h-20 w-20 rounded-full" />
     </div>
-    <div class="flex flex-col items-center">
-      <span class="text-lg font-bold mb-1">Centre for UG & PG Studies (CUPGS)</span>
-      <span class="text-base font-medium">(In-Campus College of the University)</span>
+
+    <!-- Vertical Separator -->
+    <div class="border-l border-gray-600 h-20"></div>
+
+    <!-- BPUT Logo -->
+    <div class="bg-[#1a1a1f] rounded-full border border-gray-700 p-2 flex items-center justify-center">
+      <img src="logo.png" alt="BPUT Logo" class="h-20 w-20 rounded-full" />
     </div>
-  </header>
+
+    <!-- University name text -->
+    <div class="ml-4 flex flex-col justify-center">
+      <span class="text-xl font-bold">Biju Patnaik University of Technology, Odisha</span>
+      <span class="text-lg font-semibold">ବିଜୁ ପଟ୍ଟନାୟକ ବୈଷୟିକ ବିଶ୍ଵବିଦ୍ୟାଳୟ, ଓଡ଼ିଶା</span>
+    </div>
+  </div>
+
+  <!-- Right side: CUPGS text -->
+  <div class="flex flex-col items-center justify-center text-center">
+    <span class="text-lg font-bold mb-1">Centre for UG & PG Studies (CUPGS)</span>
+    <span class="text-base font-medium">(In-Campus College of the University)</span>
+  </div>
+</header>
+
+
+
 
   <!-- Navigation -->
   <nav id="navbar" class="flex justify-center shadow opacity-0 -translate-y-10 transition-all duration-700 delay-300">
@@ -205,9 +266,15 @@
     <a href="#" class="px-5 py-3 font-semibold">Contacts</a>
   </nav>
 
-  <!-- Scrolling Image Gallery -->
-  <section class="w-full overflow-hidden py-8" style="background-color: transparent;">
-    <div class="no-scrollbar scrolling-wrapper" id="gallery">
+<!-- Scrolling Image Gallery -->
+<section class="w-full py-8" style="background-color: transparent;">
+  <!-- Scrollable container with scrollbar -->
+  <div id="gallery-container" 
+       class="overflow-x-auto scrollbar-thin cursor-grab active:cursor-grabbing" 
+       style="scrollbar-color:#64d5f6 #121212; scrollbar-width:thin; white-space:nowrap;">
+       
+    <div class="flex gap-6 w-max select-none" id="gallery">
+      <!-- First Set -->
       <img src="image1.jpg" alt="Image 1" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
       <img src="image2.jpg" alt="Image 2" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
       <img src="image3.jpg" alt="Image 3" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
@@ -219,7 +286,11 @@
       <img src="image9.jpg" alt="Image 9" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
       <img src="image10.jpg" alt="Image 10" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
       <img src="image11.jpg" alt="Image 11" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
-      <!-- Repeat images for seamless scroll -->
+      <img src="image12.jpg" alt="Image 12" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
+      <img src="image13.jpg" alt="Image 13" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
+      <img src="image14.jpg" alt="Image 14" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
+
+      <!-- Repeat for seamless scroll -->
       <img src="image1.jpg" alt="Image 1" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
       <img src="image2.jpg" alt="Image 2" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
       <img src="image3.jpg" alt="Image 3" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
@@ -231,8 +302,78 @@
       <img src="image9.jpg" alt="Image 9" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
       <img src="image10.jpg" alt="Image 10" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
       <img src="image11.jpg" alt="Image 11" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
+      <img src="image12.jpg" alt="Image 12" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
+      <img src="image13.jpg" alt="Image 13" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
+      <img src="image14.jpg" alt="Image 14" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
     </div>
-  </section>
+  </div>
+</section>
+
+<!-- Auto-scroll + drag-to-scroll script -->
+<script>
+(function () {
+  const container = document.getElementById('gallery-container');
+  if (!container) return;
+
+  const SPEED = 0.6; // px per frame (increase for faster auto-scroll)
+  const RESUME_DELAY = 2000; // ms to wait before resuming after user input
+  let isAuto = false;
+  let userPaused = false;
+  let resumeTimer;
+
+  // Auto-scroll loop
+  function step() {
+    if (!userPaused && container.scrollWidth > container.clientWidth) {
+      const half = container.scrollWidth / 2; // since images are duplicated
+      isAuto = true;
+      container.scrollLeft += SPEED;
+      if (container.scrollLeft >= half) container.scrollLeft = 0;
+      requestAnimationFrame(() => { isAuto = false; });
+    }
+    requestAnimationFrame(step);
+  }
+
+  // Pause on user input
+  function pauseForUser() {
+    if (isAuto) return; // ignore programmatic scrolls
+    userPaused = true;
+    if (resumeTimer) clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => { userPaused = false; }, RESUME_DELAY);
+  }
+
+  // Scrollbar, wheel, touch = user input
+  container.addEventListener('wheel', pauseForUser, { passive: true });
+  container.addEventListener('touchstart', pauseForUser, { passive: true });
+  container.addEventListener('mousedown', pauseForUser);
+  container.addEventListener('scroll', pauseForUser, { passive: true });
+
+  // Drag-to-scroll
+  let isDown = false, startX, scrollLeft;
+  container.addEventListener('mousedown', e => {
+    isDown = true;
+    container.classList.add('dragging');
+    startX = e.pageX - container.offsetLeft;
+    scrollLeft = container.scrollLeft;
+    e.preventDefault();
+  });
+  container.addEventListener('mouseleave', () => { isDown = false; });
+  container.addEventListener('mouseup', () => { isDown = false; });
+  container.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    const x = e.pageX - container.offsetLeft;
+    const walk = (x - startX) * 1.2; // scroll speed factor
+    container.scrollLeft = scrollLeft - walk;
+  });
+
+  // Touch drag works by default with overflow-x-auto, but still pause auto
+  container.addEventListener('touchmove', pauseForUser, { passive: true });
+
+  // Start
+  window.addEventListener('load', () => requestAnimationFrame(step));
+})();
+</script>
+
+
 
   <!-- Modal for Enlarged Image -->
   <div id="img-modal" style="display:none;">
@@ -337,20 +478,33 @@
             droneroboticsclub.cupgs@gmail.com
           </a>
         </div>
-        <div class="flex gap-8 mt-2">
-          <a href="https://www.facebook.com/bputofficial" target="_blank" rel="noopener noreferrer" class="text-[#64d5f6] hover:text-blue-500">
-            <i class="fab fa-facebook-f text-2xl"></i>
-          </a>
-          <a href="https://x.com/bputofficial" target="_blank" rel="noopener noreferrer" class="text-[#64d5f6] hover:text-blue-500">
-            <i class="fab fa-twitter text-2xl"></i>
-          </a>
-          <a href="https://www.youtube.com/bputodisha" target="_blank" rel="noopener noreferrer" class="text-[#64d5f6] hover:text-blue-500">
-            <i class="fab fa-youtube text-2xl"></i>
-          </a>
-          <a href="https://www.linkedin.com/school/biju-patnaik-university-of-technology-odisha/" target="_blank" rel="noopener noreferrer" class="text-[#64d5f6] hover:text-blue-500">
-            <i class="fab fa-linkedin-in text-2xl"></i>
-          </a>
-        </div>
+       <div class="flex gap-8 mt-2">
+  <!-- Facebook -->
+  <a href="https://www.facebook.com/bputofficial" target="_blank" rel="noopener noreferrer" class="text-[#64d5f6] hover:text-blue-500">
+    <i class="fab fa-facebook-f text-2xl"></i>
+  </a>
+
+  <!-- Instagram -->
+  <a href="https://www.instagram.com/drclub2025/" target="_blank" rel="noopener noreferrer" class="text-[#64d5f6] hover:text-pink-500">
+    <i class="fab fa-instagram text-2xl"></i>
+  </a>
+
+  <!-- Twitter -->
+  <a href="https://x.com/bputofficial" target="_blank" rel="noopener noreferrer" class="text-[#64d5f6] hover:text-blue-500">
+    <i class="fab fa-twitter text-2xl"></i>
+  </a>
+
+  <!-- YouTube -->
+  <a href="https://www.youtube.com/bputodisha" target="_blank" rel="noopener noreferrer" class="text-[#64d5f6] hover:text-red-500">
+    <i class="fab fa-youtube text-2xl"></i>
+  </a>
+
+  <!-- LinkedIn -->
+  <a href="https://www.linkedin.com/school/biju-patnaik-university-of-technology-odisha/" target="_blank" rel="noopener noreferrer" class="text-[#64d5f6] hover:text-blue-500">
+    <i class="fab fa-linkedin-in text-2xl"></i>
+  </a>
+</div>
+
       </div>
       <div class="flex-1 flex flex-col items-center px-4 w-full">
         <div class="w-full flex flex-col items-center">
