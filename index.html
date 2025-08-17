@@ -9,28 +9,36 @@
   <!-- Framer Motion (for animations) -->
   <script src="https://unpkg.com/framer-motion@10.12.16/dist/framer-motion.umd.js"></script>
   <style>
-    /* AMOLED Black Theme with Minimal, Good-looking Colors */
+    /* AMOLED Black Theme with minimal, readable colors */
     body {
       background: #000000; /* True AMOLED black */
-      color: #d1d5db; /* Tailwind gray-300 for text */
+      color: #d1d5db; /* Tailwind gray-300 */
       font-family: 'Poppins', Arial, sans-serif;
-      background-image: url('bg-image.png'); /* Keep your background image */
+      background-image: url('bg-image.png');
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center center;
       background-attachment: fixed;
     }
-    /* Loader transition styles */
+    /* Loader styles */
     #logo-loader {
       transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1),
                   transform 0.7s cubic-bezier(0.4,0,0.2,1);
       transform: scale(1);
       background: #000 !important;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
     }
     #logo-loader.hide {
       opacity: 0;
       pointer-events: none;
       transform: scale(0.88);
+      transition: opacity 0.7s ease, transform 0.7s ease;
     }
     /* Loader animation */
     @keyframes spin-slow {
@@ -40,7 +48,7 @@
     .animate-spin-slow {
       animation: spin-slow 2.6s linear infinite;
     }
-    /* Hide scrollbar */
+    /* Hide scrollbar for scrolling gallery */
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     /* Auto horizontal scrolling animation */
@@ -53,12 +61,14 @@
       gap: 1.5rem;
       animation: scroll-left 30s linear infinite;
     }
-    /* Modal styles for enlarged image */
+    /* Modal styles */
     .modal-overlay {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
       background: rgba(0,0,0,0.85);
-      display: flex; justify-content: center; align-items: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       z-index: 50;
     }
     .modal-img {
@@ -71,9 +81,9 @@
       transition: transform 0.3s;
       transform: scale(1.08);
     }
-    /* Dark containers with subtle borders for depth */
+    /* Dark container backgrounds with subtle border and shadows */
     header, nav, #sidebar, #notices, section.bg-white, .bg-white {
-      background-color: #121212 !important; /* dark gray black */
+      background-color: #121212 !important;
       color: #d1d5db !important;
       box-shadow: 0 4px 30px rgba(255 255 255 / 0.05);
       border-radius: 12px;
@@ -83,7 +93,7 @@
       background-color: #121212 !important;
       color: #d1d5db !important;
     }
-    /* Navigation bar styling and hover effect */
+    /* Navigation styling and hover glowing */
     nav {
       background: rgba(18,18,18,0.95);
       border-bottom: 1px solid #27272a;
@@ -94,8 +104,8 @@
       color: #d1d5db !important;
       border-radius: 0.5rem;
       padding: 0.75rem 1.5rem;
-      position: relative;
       font-weight: 600;
+      position: relative;
     }
     nav a:hover {
       box-shadow: 0 0 15px 2px rgb(100 213 246 / 0.6);
@@ -120,18 +130,17 @@
     }
     /* Headings and text colors */
     h1, h2, h3, h4, h5, h6, .font-bold {
-      color: #e0e7ff !important; /* light indigo */
+      color: #e0e7ff !important;
     }
     /* Accent link color */
     a {
       color: #64d5f6 !important;
     }
-    /* Profile cards animation and style */
+    /* Profile cards styling and animation */
     .profile-card {
       opacity: 0;
       transform: translateY(35px) scale(0.95);
-      transition: opacity 0.9s cubic-bezier(0.4,0,0.2,1),
-                  transform 0.9s cubic-bezier(0.4,0,0.2,1);
+      transition: opacity 0.9s cubic-bezier(0.4,0,0.2,1), transform 0.9s cubic-bezier(0.4,0,0.2,1);
       background-color: #1a1a1f;
       border-radius: 1rem;
       box-shadow: 0 8px 30px rgb(0 0 0 / 0.6);
@@ -152,23 +161,21 @@
     }
     /* Notices and sidebar text colors */
     #notices ul li, #sidebar ul li {
-      color: #cbd5e1; /* tailwind gray-300 */
+      color: #cbd5e1;
     }
   </style>
 </head>
 <body class="flex flex-col min-h-screen">
-  <!-- Logo Loading Overlay -->
-  <div id="logo-loader" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#000]">
+  <!-- Loader with animated logo and club name below -->
+  <div id="logo-loader">
     <img src="drone-robotics-logo.png" alt="Drone & Robotics Club Logo Loader" class="animate-spin-slow h-44 w-44 rounded-full shadow-xl mb-8" />
-    <span id="loader-club-text" class="text-2xl font-semibold text-[#e0e7ff] opacity-0 transition-opacity duration-[1600ms] mt-2" style="font-family: 'Poppins',sans-serif;">
+    <span id="loader-club-text" class="text-2xl font-semibold text-[#e0e7ff] opacity-0 transition-opacity duration-[1600ms]" style="font-family: 'Poppins',sans-serif;">
       Drone & Robotics Club
     </span>
   </div>
 
-  <!-- Rest of your original code below remains unchanged -->
-
   <!-- Header -->
-  <header id="header" class="flex items-center justify-between p-4 shadow-sm">
+  <header id="header" class="flex items-center justify-between p-4 shadow-sm opacity-0 -translate-y-20 transition-all duration-700">
     <div class="flex items-center">
       <div class="bg-[#1a1a1f] rounded-full border border-gray-700 p-2">
         <img src="logo.png" alt="BPUT Logo" class="h-20 w-20 rounded-full" />
@@ -198,7 +205,7 @@
     <a href="#" class="px-5 py-3 font-semibold">Contacts</a>
   </nav>
 
-  <!-- Image Scrolling Gallery -->
+  <!-- Scrolling Image Gallery -->
   <section class="w-full overflow-hidden py-8" style="background-color: transparent;">
     <div class="no-scrollbar scrolling-wrapper" id="gallery">
       <img src="image1.jpg" alt="Image 1" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
@@ -212,7 +219,7 @@
       <img src="image9.jpg" alt="Image 9" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
       <img src="image10.jpg" alt="Image 10" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
       <img src="image11.jpg" alt="Image 11" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
-      <!-- Repeat for seamless scrolling -->
+      <!-- Repeat images for seamless scroll -->
       <img src="image1.jpg" alt="Image 1" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
       <img src="image2.jpg" alt="Image 2" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
       <img src="image3.jpg" alt="Image 3" class="gallery-img w-64 h-40 object-cover rounded-xl filter grayscale hover:filter-none transition-all duration-500 cursor-pointer shadow-lg flex-shrink-0" />
@@ -227,10 +234,157 @@
     </div>
   </section>
 
-  <!-- More site sections unchanged ... -->
+  <!-- Modal for Enlarged Image -->
+  <div id="img-modal" style="display:none;">
+    <div class="modal-overlay" id="modal-overlay">
+      <img id="modal-img" src="" alt="Enlarged Image" class="modal-img"/>
+    </div>
+  </div>
 
-  <!-- Scripts -->
+  <!-- Hero Section -->
+  <section id="hero" class="bg-[#121212] text-center py-16 opacity-0 scale-90 transition-all duration-800 delay-500 rounded-xl mx-6 shadow-lg">
+    <h2 class="text-4xl font-bold mb-2" style="color: #dbeafe;">
+      Welcome to Drone & Robotics Club
+    </h2>
+    <div class="text-center">
+      <p class="text-2xl font-medium leading-relaxed max-w-3xl mx-auto" style="color: #a5b4fc;">
+        Join our community of innovators and problem-solvers as we explore the
+        exciting world of electronics and robotics through workshops and
+        competitions.
+      </p>
+    </div>
+  </section>
 
+  <!-- Main Content -->
+  <main class="flex flex-1 p-6 gap-6">
+    <!-- Notices -->
+    <section id="notices" class="flex-1 bg-[#121212] p-6 rounded-2xl shadow-lg opacity-0 -translate-x-20 transition-all duration-800 delay-600 border border-gray-700">
+      <h2 class="text-2xl font-bold text-[#a5b4fc] mb-4">Notices</h2>
+      <ul class="space-y-4 text-gray-400">
+        <li class="border-b border-gray-700 pb-2">Coming Soon.....</li>
+      </ul>
+    </section>
+    <!-- Sidebar -->
+    <aside id="sidebar" class="w-72 space-y-4 opacity-0 translate-x-20 transition-all duration-800 delay-700 bg-[#121212] text-gray-400 rounded-2xl shadow-md p-4 border border-gray-700">
+      <div>
+        <h3 class="text-lg font-bold text-[#a5b4fc] mb-2">BPUT Anthem</h3>
+        <a href="https://drive.google.com/file/d/14QTDfvTJG3Lx8_ZePZfjboM7S9eqEC7R/view" class="flex items-center hover:text-[#dbeafe]" target="_blank" rel="noopener noreferrer">
+          <span class="mr-2 text-xl">🎵</span>
+          <span>Listen to Anthem</span>
+        </a>
+      </div>
+      <div>
+        <h3 class="text-lg font-bold text-[#a5b4fc] mb-2">Student Services</h3>
+        <ul class="list-disc list-inside text-gray-400">
+          <li>Membership Portal</li>
+          <li>Project Submissions</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-lg font-bold text-[#a5b4fc] mb-2">E-Learning Resources</h3>
+        <ul class="list-disc list-inside text-gray-400">
+          <li>Robotics Tutorials</li>
+          <li>AI & ML in Robotics</li>
+        </ul>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Profiles Grid Section -->
+  <section class="w-full py-8 bg-[#121212] flex justify-center text-gray-400">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 place-items-center mx-auto">
+      <div class="flex flex-col items-center w-72 bg-[#1f2937] rounded-xl shadow-lg px-6 py-4 min-h-[170px] profile-card">
+        <img src="profile2.jpg" alt="Chief Patron" class="w-40 h-48 object-cover rounded-lg shadow-lg mb-3" />
+        <div class="text-center text-2xl font-bold text-yellow-400 mb-2">Chief Patron</div>
+        <div class="text-center font-semibold leading-tight">Prof. Amiya Kumar Rath</div>
+      </div>
+      <div class="flex flex-col items-center w-72 bg-[#1f2937] rounded-xl shadow-lg px-6 py-4 min-h-[170px] profile-card">
+        <img src="profile3.jpg" alt="Patron" class="w-40 h-48 object-cover rounded-lg shadow-lg mb-3" />
+        <div class="text-center text-2xl font-bold text-yellow-400 mb-2">Patron</div>
+        <div class="text-center font-semibold leading-tight">Dr. Sivkumar Mishra</div>
+      </div>
+      <div class="flex flex-col items-center w-72 bg-[#1f2937] rounded-xl shadow-lg px-6 py-4 min-h-[170px] profile-card">
+        <img src="profile4.jpg" alt="Faculty-In-Charge" class="w-40 h-48 object-cover rounded-lg shadow-lg mb-3" />
+        <div class="text-center text-2xl font-bold text-yellow-400 mb-2">Faculty-In-Charge</div>
+        <div class="text-center font-semibold leading-tight">Dr. Saswata Satpathi</div>
+      </div>
+      <div class="flex flex-col items-center w-72 bg-[#1f2937] rounded-xl shadow-lg px-6 py-4 min-h-[170px] profile-card">
+        <img src="profile5.jpg" alt="Assistant Secretary" class="w-40 h-48 object-cover rounded-lg shadow-lg mb-3" />
+        <div class="text-center text-2xl font-bold text-yellow-400 mb-2">Assistant Secretary</div>
+        <div class="text-center font-semibold leading-tight">Biki Pradhan</div>
+      </div>
+      <div class="flex flex-col items-center w-72 bg-[#1f2937] rounded-xl shadow-lg px-6 py-4 min-h-[170px] profile-card">
+        <img src="profile6.jpg" alt="Secretary" class="w-40 h-48 object-cover rounded-lg shadow-lg mb-3" />
+        <div class="text-center text-2xl font-bold text-yellow-400 mb-2">Secretary</div>
+        <div class="text-center font-semibold leading-tight">Swarnabh Swain</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <section class="w-full bg-[#121212] py-6 px-0 border-t border-gray-700 text-gray-400" id="footer">
+    <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center w-full max-w-7xl mx-auto gap-8">
+      <div class="flex-1 flex flex-col items-start px-4">
+        <div class="text-2xl font-bold text-[#64d5f6] text-left mb-2">Biju Patnaik University of Technology (BPUT)</div>
+        <div class="italic text-lg text-gray-500 text-left mb-3">Chhend Colony, Rourkela, Odisha-769015</div>
+        <div class="flex flex-col sm:flex-row sm:justify-start gap-8 mb-3">
+          <div class="text-base font-semibold">Phone : <span class="font-bold"> (0661) 2482556 </span></div>
+          <div class="text-base font-semibold">Fax : <span class="font-bold"> (0661) 2482562 </span></div>
+        </div>
+        <div class="text-base font-semibold mb-3">
+          Email : 
+          <a href="mailto:droneroboticsclub.cupgs@gmail.com" target="_blank" class="font-bold text-[#64d5f6] hover:underline">
+            droneroboticsclub.cupgs@gmail.com
+          </a>
+        </div>
+        <div class="flex gap-8 mt-2">
+          <a href="https://www.facebook.com/bputofficial" target="_blank" rel="noopener noreferrer" class="text-[#64d5f6] hover:text-blue-500">
+            <i class="fab fa-facebook-f text-2xl"></i>
+          </a>
+          <a href="https://x.com/bputofficial" target="_blank" rel="noopener noreferrer" class="text-[#64d5f6] hover:text-blue-500">
+            <i class="fab fa-twitter text-2xl"></i>
+          </a>
+          <a href="https://www.youtube.com/bputodisha" target="_blank" rel="noopener noreferrer" class="text-[#64d5f6] hover:text-blue-500">
+            <i class="fab fa-youtube text-2xl"></i>
+          </a>
+          <a href="https://www.linkedin.com/school/biju-patnaik-university-of-technology-odisha/" target="_blank" rel="noopener noreferrer" class="text-[#64d5f6] hover:text-blue-500">
+            <i class="fab fa-linkedin-in text-2xl"></i>
+          </a>
+        </div>
+      </div>
+      <div class="flex-1 flex flex-col items-center px-4 w-full">
+        <div class="w-full flex flex-col items-center">
+          <div class="flex items-center mb-3 gap-2">
+            <span class="text-2xl font-bold text-[#64d5f6]">Location</span>
+            <span class="text-yellow-400 text-2xl ml-1"><i class="fas fa-map-marked-alt"></i></span>
+          </div>
+          <div class="w-full bg-[#1a1a1a] rounded-xl overflow-hidden mb-4" style="max-width:420px;">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3720.2377858672572!2d84.82279731541584!3d22.26111948534325!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e3f5b50f92dab87%3A0x23b8c73bb4ea5cca!2sBiju%20Patnaik%20University%20of%20Technology!5e0!3m2!1sen!2sin!4v1683200000000!5m2!1sen!2sin"
+              width="420" height="180" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+          <a
+            href="https://maps.app.goo.gl/scjxUMEfjSkouJYC7"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-[#64d5f6] font-semibold underline text-base mt-2 mb-4 hover:text-blue-500"
+          >
+            View on Google Maps
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="w-full bg-yellow-500 text-black font-medium text-sm text-center px-3 py-2 mt-7 flex flex-col md:flex-row justify-between items-center" style="font-family:'Poppins',sans-serif;">
+      <div>Copyright © 2025 CUPGS, BPUT D&R Club, All Rights Reserved.</div>
+      <div>Developed and maintained by <span class="font-bold">D&R Club Student's Union</span></div>
+    </div>
+  </section>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Animations and Loader Hide -->
   <script>
     // Fade in "Drone & Robotics Club" text on loader
     document.addEventListener('DOMContentLoaded', function () {
@@ -242,8 +396,8 @@
         }
       }, 900);
     });
-  </script>
-  <script>
+
+    // On window load, show content & hide loader
     window.addEventListener("load", () => {
       document.getElementById("header").classList.remove("opacity-0", "-translate-y-20");
       document.getElementById("navbar").classList.remove("opacity-0", "-translate-y-10");
@@ -251,15 +405,15 @@
       document.getElementById("notices").classList.remove("opacity-0", "-translate-x-20");
       document.getElementById("sidebar").classList.remove("opacity-0", "translate-x-20");
       document.getElementById("footer").classList.remove("opacity-0");
-    });
-    window.addEventListener('load', function(){
+
       var loader = document.getElementById('logo-loader');
-      if(loader) {
+      if (loader) {
         setTimeout(function() {
           loader.classList.add('hide');
           setTimeout(() => loader.style.display = 'none', 700);
         }, 4000);
       }
+
       const cards = document.querySelectorAll('.profile-card');
       cards.forEach((card, idx) => {
         setTimeout(() => card.classList.add('animated'), 350 + idx * 180);
